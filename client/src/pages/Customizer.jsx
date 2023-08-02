@@ -62,7 +62,7 @@ const Customizer = () => {
                 />
               ))}
           </motion.div>
-          
+
         </>
       )}
     </AnimatePresence>
