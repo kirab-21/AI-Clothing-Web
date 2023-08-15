@@ -33,7 +33,8 @@ const Home = () => {
                     </motion.div>
                     <motion.div {...headContentAnimation}
                     className='flex flex-col gap-5'>
-                        <p className='max-w-md font-normal text-grey-600'>Create your own unique and exclusive Tees with our brand new
+                        <p className='max-w-md font-normal text-grey-600'>Create your own unique and exclusive
+                         Tees with our brand new
                         3D customization tool. <strong>Unleash your Imaginaton</strong>{" "}
                          and define your style</p>
 

@@ -8,4 +8,5 @@ export {CustomButton,
     AiPicker,
     ColorPicker,
     FilePicker,
-    Tab};
+    Tab,
+};
