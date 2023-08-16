@@ -14,7 +14,7 @@ export const Backdrop = () => {
      temporal
      frames={60}
      alphaTest={0.85}
-     scale={10}
+     scae={10}
      rotation={[Math.PI / 2, 0, 0]}
      position ={[0, 0, -0.14]}
     >
