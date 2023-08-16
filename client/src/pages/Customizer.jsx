@@ -13,6 +13,67 @@ import { AiPicker, ColorPicker, CustomButton,FilePicker,Tab } from '../component
 const Customizer = () => {
   const snap = useSnapshot(state);
 
+  const [file, setFile] = useState('');
+  
+  const [prompt, setPrompt] = useState('');
+  const [generatingImg, setGeneratingImg] = useState(false);
+
+  const [activeEditorTab, setActiveEditorTab] = useState('');
+  const [activeFilterTab, setActiveFilterTab] = useState({
+    logoShirt: true,
+    stylishShirt:false,
+  })
+
+  //show  tab content depending on the active tab
+  const generateTabContent = () => {
+    switch(activeEditorTab) {
+      case "colorpicker":
+        return <ColorPicker/>
+      case "filepicker":
+        return <FilePicker
+          file={file}
+          setFile={setFile}
+        />
+      case "aipicker":
+        return <AiPicker/>
+      default:
+        return null;
+    }
+  }
+
+  const handleDecal =(type, result) =>{
+    const decalTypes = DecalTypes[type]
+
+    state[decalTypes.stateProperty] = result
+
+    if(!activeFilterTab[decalTypes.filterTab]) {
+      handleActiveFilterTab(decalTypes.filterTab)
+    }
+  }
+
+  const handleActiveFilterTab = (tabName) => {
+    switch(tabName) {
+      case "logoShirt":
+        state.isLogoTexture = !activeFilterTab[tabName];
+      break
+
+      case "stylishShirt":
+        state.isFullTexture = !activeFilterTab[tabName];
+
+      default:
+        state.isFullTexture = false;
+        state.isLogoTexture = true;
+    }
+  }
+
+  const readFile = (type) => {
+    reader(file)
+      .then((result) =>{
+        handleDecal(type, result)
+        setActiveEditorTab("")
+      })
+  }
+
   return (
     <AnimatePresence>
       {!snap.intro && (
@@ -28,9 +89,10 @@ const Customizer = () => {
                 <Tab
                   key={tab.name}
                   tab={tab}
-                  handleClick={()=>{}}
+                  handleClick={()=> setActiveEditorTab(tab.name)}
                 />
               ))}
+              {generateTabContent()}
             </div>
           </div>
           </motion.div>
